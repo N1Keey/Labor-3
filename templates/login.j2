@@ -1,0 +1,14 @@
+<title>Login</title>
+    <div class='content'>
+        <h1>Labor 3</h1>
+        <h2>Login</h2>
+        <form action="" method='POST'>
+            <p><input type="password" id="Passwort" name="Passwort" placeholder="Passwort"></p>
+            <p>
+                <input type="submit" id="Login" name="Login" value="Login"> 
+            </p>
+        </form>
+        {% for message in get_flashed_messages() %}
+            <div class="alert">{{ message }}</div> {# Email oder Passwort falsch! #}
+        {% endfor %}
+    </div>

@@ -2,10 +2,10 @@ import json
 from datetime import datetime
 
 def add2protocol(password, ip):
-  dt=datetime.now()
+  dt=datetime.now().isoformat()
   protocolentry={'DT':dt,'PW':password,'IP':ip}
   protocol=loadProtocol()
-  protocol.update(protocolentry)
+  protocol.append(protocolentry)
   saveProtocol(protocol)
 
 def saveProtocol(protocol):

@@ -18,3 +18,13 @@ def loadProtocol():
     jsonstring=fr.read()
     protocol=json.loads(jsonstring)
   return protocol
+
+def checkIPwithProtocol(ip,protocol):
+  ipBool=False
+  for protocolentry in protocol:
+    if ip == protocolentry.get('IP'):
+      ipBool=True
+  return ipBool
+
+def checkTimefromIP(ip, protocol):
+  print(ip)

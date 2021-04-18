@@ -27,6 +27,7 @@ def login():
                     dttsnextTryinMin=int(round(dttsnextTry / 60))+1
                     flash('Nächster Versuch erst wieder in %.0f Minuten'%(dttsnextTryinMin))
             else:
+                protocol.add2protocol(password,ip)
                 flash('Passwort falsch!')
     return render_template('login.j2')
 

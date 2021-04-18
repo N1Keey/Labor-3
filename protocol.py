@@ -2,9 +2,10 @@ import json
 from datetime import datetime
 
 def add2protocol(password, ip):
-  dt=datetime.now().isoformat()
-  protocolentry={'DT':dt,'PW':password,'IP':ip}
+  dtts=datetime.now().timestamp()
   protocol=loadProtocol()
+  id=len(protocol)
+  protocolentry={'ID':id,'DTTS':dtts,'PW':password,'IP':ip}
   protocol.append(protocolentry)
   saveProtocol(protocol)
 
@@ -19,12 +20,35 @@ def loadProtocol():
     protocol=json.loads(jsonstring)
   return protocol
 
-def checkIPwithProtocol(ip,protocol):
+def checkIPwithProtocol(ip):
+  protocol=loadProtocol()
   ipBool=False
   for protocolentry in protocol:
-    if ip == protocolentry.get('IP'):
+    if ip == protocolentry.get("IP"):
       ipBool=True
   return ipBool
 
-def checkTimefromIP(ip, protocol):
-  print(ip)
+def getIDfromIP(ip):
+  protocol=loadProtocol()
+  for entry in protocol:
+    if ip == entry.get("IP"):
+      id=entry.get("ID")
+  return id
+
+def getDTTSFromID(id):
+  protocol=loadProtocol()
+  entry=protocol[id]
+  dtts=entry.get("DTTS")
+  return dtts
+
+def getDTTSFromIP(ip):
+  id=getIDfromIP(ip)
+  dtts=getDTTSFromID(id)
+  return dtts
+  
+def getTimeDiffBetweenLogins(ip):
+  id=getIDfromIP(ip)
+  dtts=getDTTSFromID(id)
+  dttsnow=datetime.now().timestamp()
+  dttsdiff=dttsnow-dtts
+  return dttsdiff
